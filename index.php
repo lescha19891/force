@@ -57,7 +57,7 @@ $stat=statistic();
 <head>
   <meta charset="UTF-8">
 <link rel="stylesheet" href="style.css" type="text/css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
   <script src="ajax.js"></script>
 
 </head>
@@ -141,7 +141,6 @@ $stat=statistic();
         <p><span>ПОКАЗАТЬ ТОВАРЫ</span></p>
       </div>
     </div>
- 
       <table id="u11" class="ax_default box_1" >
           <tr>
               <th><?=$array[0]['name']?></th>
@@ -190,7 +189,5 @@ $stat=statistic();
 
       </table>
       
-  
-
 </body>
 </html>

@@ -6,32 +6,32 @@ function products(){
         return ("Ошибка: Невозможно подключиться к MySQL ");
     }
 
-    if (isset($__POST['opt'])){
-        $opt = htmlentities($__POST['opt']);
-        $min = htmlentities($__POST['min']);
-        $max = htmlentities($__POST['max']);
-        $more = htmlentities($__POST['more']);
-        $count = htmlentities($__POST['count']);
+    if (isset($_POST['opt'])){
+        $opt = (int)(htmlentities($_POST['opt']));
+        $min = (int)(htmlentities($_POST['min']));
+        $max = (int)(htmlentities($_POST['max']));
+        $more = (int)(htmlentities($_POST['more']));
+        $count = (int)(htmlentities($_POST['count']));
     } 
     if ($opt==1) {
         if($more==1){
             $sql = "SELECT * FROM price WHERE
             (`Стоимость, руб` BETWEEN {$min} AND {$max}) AND
-            (`Наличие на складе 1, шт`>{$count} OR 'Наличие на складе 2, шт'>{$count}) ";
+            (`Наличие на складе 1, шт`>{$count} OR `Наличие на складе 2, шт`>{$count}) ";
         } else { 
             $sql = "SELECT * FROM price WHERE
             (`Стоимость, руб` BETWEEN {$min} AND {$max}) AND
-            (`Наличие на складе 1, шт`<{$count} OR 'Наличие на складе 2, шт'<{$count}) ";
+            (`Наличие на складе 1, шт`<{$count} OR `Наличие на складе 2, шт`<{$count}) ";
         }
     } elseif($opt==2) {
         if($more==1){
             $sql = "SELECT * FROM price WHERE
-            ('Стоимость опт, руб' BETWEEN {$min} AND {$max}) AND
-            (`Наличие на складе 1, шт`>{$count} OR 'Наличие на складе 2, шт'>{$count}) ";
+            (`Стоимость опт, руб` BETWEEN {$min} AND {$max}) AND
+            (`Наличие на складе 1, шт`>{$count} OR `Наличие на складе 2, шт`>{$count}) ";
         } else { 
             $sql = "SELECT * FROM price WHERE
-            ('Стоимость опт, руб' BETWEEN {$min} AND {$max}) AND
-            (`Наличие на складе 1, шт`<{$count} OR 'Наличие на складе 2, шт'<{$count}) ";
+            (`Стоимость опт, руб` BETWEEN {$min} AND {$max}) AND
+            (`Наличие на складе 1, шт`<{$count} OR `Наличие на складе 2, шт`<{$count}) ";
         }
     } else{
         $sql = "SELECT * FROM price";

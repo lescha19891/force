@@ -4,8 +4,9 @@ function getfilter(){
     var maxPrice = $('#u5_input').val();
     var moreOrLess = $('#u7_input').val();
     var units = $('#u9_input').val();
+    
     $.ajax({
-        type: "POST",
+        method: "POST",
         url: "filter.php",
         data: {
             opt:optOrNo,
@@ -15,6 +16,6 @@ function getfilter(){
             count:units 
         }
     }).success(function(result){
-            $("#u11").html( 'gyky' );
+            $("#u11").html( result );
         })
     };   
