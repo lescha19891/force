@@ -1,8 +1,10 @@
 <?php 
 require_once 'products.php';
-require_once 'statistic.php';
-$prod=products();
-$stat=statistic();
+require_once 'base.php';
+$link=connect("dbprice");
+$prod=products($link);
+$stat=statistic($link);
+mysqli_close ($link);
 ?>
 
 <table id="u11" class="ax_default box_1" >

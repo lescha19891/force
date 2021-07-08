@@ -3,7 +3,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 require '../../vendor/autoload.php'; // путь до библиотеки PhpSpreadsheet
 require_once 'products.php';
-require_once 'statistic.php';
+require_once 'base.php';
 
 $file=__DIR__ .'/pricelist.xls';
 $reader = IOFactory::createReaderForFile($file);
@@ -20,37 +20,19 @@ for ($row = 1; $row <= $cells->getHighestRow(); $row++){
 	$array[$row-1]['country']=($cells->get('F'.$row))?$cells->get('F'.$row)->getValue():'';
 }
 
-// Создание  БД
-$conn = new mysqli('localhost','root', 'root');
-$sql = " CREATE DATABASE IF NOT EXISTS  dbprice";
-mysqli_query($conn, $sql);    
+createBase("dbprice");
+$link=connect("dbprice");
+createTable($link,$array[0],'price');
 
-// Перезагрузка таблицы
-$conn = mysqli_connect('localhost',"root", "root","dbprice");
-mysqli_set_charset($conn, 'utf8');
-$sql="DROP TABLE IF EXISTS price";
-mysqli_query($conn, $sql);
-$sql="CREATE TABLE  price   ( 
-	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	`{$array[0]['name']}`  varchar(100),
-	`{$array[0]['price']}` decimal(15,2),
-	`{$array[0]['priceopt']}` decimal(15,2),
-	`{$array[0]['store1']}`int(10),
-	`{$array[0]['store2']}` int(10),
-	`{$array[0]['country']}` char(50)
-)";
-mysqli_query($conn, $sql);
-
-//Загрузка данных
 $slice = array_slice($array, 1);
 foreach ($slice as $i){
 	$sql= "INSERT INTO `price` VALUES 
 	(NULL, '{$i['name']}','{$i['price']}','{$i['priceopt']}','{$i['store1']}','{$i['store2']}','{$i['country']}')";    
-	mysqli_query($conn, $sql);
+	mysqli_query($link, $sql);
 }     
-mysqli_close ($conn);
-$prod=products();
-$stat=statistic();
+$prod=products($link);
+$stat=statistic($link);
+mysqli_close ($link);
 ?>
 <!DOCTYPE html>
 <html lang="en">
