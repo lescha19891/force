@@ -1,9 +1,9 @@
 <?php 
-require_once 'products.php';
-require_once 'base.php';
+set_time_limit(150);
+require_once 'function.php';
 $link=connect("dbprice");
 $prod=products($link);
-$stat=statistic($link);
+$stat=filterStat($prod);
 mysqli_close ($link);
 ?>
 

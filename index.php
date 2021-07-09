@@ -1,9 +1,10 @@
 <?php
+set_time_limit(150);
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 require '../../vendor/autoload.php'; // путь до библиотеки PhpSpreadsheet
-require_once 'products.php';
-require_once 'base.php';
+
+require_once 'function.php';
 
 $file=__DIR__ .'/pricelist.xls';
 $reader = IOFactory::createReaderForFile($file);
