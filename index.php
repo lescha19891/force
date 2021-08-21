@@ -159,8 +159,8 @@ mysqli_close ($link);
           <?php endforeach;?>
           <tr>
               <td><b>Средняя стоимость</b></td>
-              <td><?=$stat["money1"]?></td>
-              <td><?=$stat["moneyopt"]?></td>
+              <td><?=round($stat["money1"], 2)?></td>
+              <td><?=round($stat["moneyopt"],2)?></td>
           </tr>
           <tr >
               <td><b>Всего осталось</b></td>
